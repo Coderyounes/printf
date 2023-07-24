@@ -16,29 +16,32 @@ int selector(const char *format, id_printf f_arr[], va_list args)
 	{
 		if (format[i] == '%')
 		{
-			for (j = 0; f_arr[j].idt != NULL; j++)
+			if (format[i + 1] == '%')
 			{
-				if (format[i + 1] == f_arr[j].idt[0])
-				{
-					rtn = f_arr[j].p(args);
-					if (rtn == -1)
-						return (-1);
-					length += rtn;
-					break;
-				}
+				_write_char('%');
+				length++;
+				i++;
 			}
-			if (f_arr[j].idt == NULL && format[i + 1] != ' ')
+			else
 			{
-				if (format[i + 1] != '\0')
+				for (j = 0; f_arr[j].idt != NULL; j++)
+				{
+					if (format[i + 1] == f_arr[j].idt[0])
+					{
+						rtn = f_arr[j].p(args);
+						if (rtn == -1)
+							return (-1);
+						length += rtn;
+						break;
+					}
+				}
+				if (f_arr[j].idt == NULL && format[i + 1] != ' ')
 				{
 					_write_char(format[i]);
-					_write_char(format[i]);
-					length += 2;
+					length++;
 				}
-				else
-					return (-1);
+				i++;
 			}
-			i++;
 		}
 		else
 		{
