@@ -25,7 +25,7 @@ int selector(const char *format, id_printf f_arr[], va_list args)
 		{
 			_write_char('%');
 			length++;
-			i++;
+			i++; /* Skip the next character since we've handled %% */
 			continue;
 		}
 
