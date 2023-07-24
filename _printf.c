@@ -1,18 +1,22 @@
 #include "main.h"
 
+
 /**
- * _printf - Function to Print data
+ * _printf- function to print data
  *
- * @format: indetifier characherts
+ * @format: char indetifier
  *
- * Return: the total printed chars
+ * Return: number of characters printed
  */
 
 int _printf(const char *format, ...)
 {
+	va_list args;
 	int printed_characters = 0;
 	int (*print_func)(va_list);
-	va_list args;
+
+	if (format == NULL)
+		return (-1);
 
 	va_start(args, format);
 
