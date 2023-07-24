@@ -53,6 +53,41 @@ int print_percent(__attribute__((unused)) va_list arg)
 }
 
 /**
+ * print_int - Function to print integer
+ * @arg: argument(integer) to print
+ * Return: the len
+ */
+
+int print_int(va_list arg)
+{
+	int n = va_arg(arg, int);
+	int division = 1;
+	int len = 0;
+	unsigned int num;
+
+	n = (n < 0) ? (len += putchar('-'), -n) : n;
+	num = n;
+
+	if (num == 0)
+	{
+		len += putchar('0');
+		return (0);
+	}
+
+	while (num / division > 9)
+		division *= 10;
+
+	while (division != 0)
+	{
+		len += putchar('0' + num / division);
+		num %= division;
+		division /= 10;
+	}
+
+	return (len);
+}
+
+/**
  * get_print_func - pointer to function
  *
  * @c: datatype identifier
@@ -72,6 +107,9 @@ int (*get_print_func(const char c))(va_list)
 			return (print_string);
 		case '%':
 			return (print_percent);
+		case 'i':
+		case 'd':
+			return (print_int);
 		default:
 			return (NULL);
 	}
