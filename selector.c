@@ -25,6 +25,11 @@ int print_string(va_list arg)
 	const char *s = va_arg(arg, const char *);
 	int printed_characters = 0;
 
+	if (s == NULL)
+	{
+		s = "(null)";
+	}
+
 	while (*s != '\0')
 	{
 		putchar(*s);
