@@ -28,7 +28,9 @@ int _printf(const char *format, ...)
 			if (*format == '\0')
 				break;
 				if (*format == '%')
+				{
 					return (-1);
+				}
 
 			print_func = get_print_func(*format);
 			if (print_func != NULL)
