@@ -65,13 +65,21 @@ int print_int(va_list arg)
 	int len = 0;
 	unsigned int num;
 
-	n = (n < 0) ? (len += putchar('-'), -n) : n;
-	num = n;
+	if (n < 0)
+	{
+		putchar('-');
+		len++;
+		num = -n;
+	}
+	else
+	{
+		num = n;
+	}
 
 	if (num == 0)
 	{
-		len += putchar('0');
-		return (0);
+		putchar('0');
+		return (len + 1);
 	}
 
 	while (num / division > 9)
@@ -79,7 +87,8 @@ int print_int(va_list arg)
 
 	while (division != 0)
 	{
-		len += putchar('0' + num / division);
+		putchar('0' + num / division);
+		len++;
 		num %= division;
 		division /= 10;
 	}
